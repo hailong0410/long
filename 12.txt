@@ -1,0 +1,6 @@
+cd $(CURRENT_DIRECTORY)
+javac $(FILE_NAME)
+if $(EXITCODE)!=0
+exit
+endif
+java $(NAME_PART)

@@ -1,0 +1,127 @@
+Ex1a
+Maximize z=150x1+175x2
+subject to 
+  7x1+11x2<=77
+  10x1+8x2<=80
+  x1<=9
+  x2<=6
+  x1,x2>=0
+
+Exercise 1b
+- Using linprog function 
+f = [-150; -175]; % for minimization problem: f = [150; 175]
+A = [7 11; 10 8; 1 0; 0 1];
+b = [77; 80; 9; 6];
+lb = zeros(4,1);
+[X,fval,exitflag,output,lambda] = linprog(f,A,b,[],[],lb)
+maximum_profit = 150*X(1) + 175*X(2)
+
+
+Exercise 1c
+- Using graphical solution 
+x = linspace(0, 9);
+y1 = (-7/11*x +7);
+y2 = (10 - 10/8*x);
+[u, v] = meshgrid(linspace(0,9), linspace(0,9));
+figure
+box on
+hold on
+plot(x, y1, 'r', 'LineWidth', 2)
+plot(x, y2, 'b', 'LineWidth', 2);
+plot(X(1),X(2),'k*','LineWidth', 5);
+axis([0 9 0 9]);
+xlabel('Regular quality’)
+ylabel('Premium quality’)
+legend('Regular quality','Premium quality','Solution’)
+legend boxoff
+hold off;
+set(gca,'FontSize',16)
+
+
+Ex2:
+Define
+x = 0:0.01:0.8;
+y = 0.2 + 25*x -200*x.^2 + 675*x.^3 - 900*x.^4 + 400*x.^5;
+f = @(x) 0.2 + 25*x -200*x.^2 + 675*x.^3 - 900*x.^4 + 400*x.^5;
+
+Exercise 2a
+- Using trapz function
+Z = trapz(x,y);
+- Plot to check
+box on
+hold on
+grid on
+plot(x, f(x), 'r-', 'LineWidth',2)
+plot(x(1:length(Z)), Z, 'k*', 'LineWidth',1 );
+xlabel('x')
+ylabel('y')
+hold off
+Exercise 2b
+- Using cumtrapz function 
+Z = cumtrapz(x,y);
+- Plot to check
+box on
+hold on
+grid on
+plot(x, f(x), 'r-', 'LineWidth',2)
+plot(x(1:length(Z)), Z, 'k*', 'LineWidth',1 );
+xlabel('x')
+ylabel('y')
+hold off
+Exercise 2c
+- Using integral function 
+Z = integral(f,0,0.8);
+- Plot to check
+box on
+hold on
+grid on
+plot(x, f(x), 'r-', 'LineWidth',2)
+plot(x(1:length(Z)), Z, 'k*', 'LineWidth',1 );
+xlabel('x')
+ylabel('y')
+hold off
+Exercise 2c
+- Using quadadapt function:
+Z = quadadapt(f,0,0.8,1e-6);
+- Plot to check
+box on
+hold on
+grid on
+plot(x, f(x), 'r-', 'LineWidth',2)
+plot(x(1:length(Z)), Z, 'k*', 'LineWidth',1 );
+xlabel('x')
+ylabel('y')
+hold off
+
+Ex3:
+Define
+x = 0:0.01:0.8;
+y = 0.2 + 25.*x -200*x.^2 + 675*x.^3 - 900*x.^4 + 400*x.^5;
+f = @(x) 0.2 + 25.*x - 200*x.^2 + 675*x.^3 - 900*x.^4 + 400*x.^5;
+df = @(x) 25 - 400*x + 2025*x.^2 - 3600*x.^3 + 2000*x.^4;
+
+Exercise 3a
+- Using diff function 
+Q = diff(f(x))./diff(x);
+- Plot to check
+figure
+box on
+hold on
+grid on
+plot(x, df(x), 'b-','LineWidth',2)
+plot(x(1:length(Q)), Q, 'go','LineWidth',1);
+xlabel('x')
+ylabel('y')
+legend('df(x)','dif(f(x))/diff(x)')
+legend boxoff
+set(gca,'FontSize',16)
+Exercise 3c-3e
+- Using functions:
+p = 10;
+d_forward = forward(y,x,p);
+plot(x(p), d_forward, 'r*','LineWidth',5)
+d_backward = backward(y,x,p);
+plot(x(p), d_backward, 'b*','LineWidth',5)
+d_central = central(y,x,p);
+plot(x(p), d_central, 'c*','LineWidth',5)
+

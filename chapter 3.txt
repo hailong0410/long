@@ -1,0 +1,18 @@
+Naïve Gauss elimination
+
+1. Forward Elimination of Unknowns
+a. Reduce the coefficient matrix [A] to an upper triangular system
+b. Eliminate x1
+
+from the 2nd to nth Eqns.
+
+c. Eliminate x2
+
+from the 3rd to nth Eqns.
+
+d. Continue process until the nth equation has only 1 Non-Zero coefficient
+
+2. Back-substituted
+a. Starting from the last equation, => find xn
+b. Substitute to (n-1)th equation => find xn-1
+c. Each of the unknowns is found

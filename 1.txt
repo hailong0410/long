@@ -1,0 +1,5 @@
+    write a java oop which contains 4 class person, student, course lecturer, with the appropriate relationships between these
+class in order to manage the 3 ict course oop web ip as follow:
+ for each course, the course name is inserted directyly into a text file. others are enterd from the keyboard
+ and saved into a text filed. other include the number of student n ,the number of lecturers m , the list of lecturer names, the list of student id, the list of student
+ full names, the list of student attendance marks, the list of midtermmark, the list of finalmark, the list of final coursemark (caculated by avegaring attendane 10%, mid 40%, final 50%

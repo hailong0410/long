@@ -1,0 +1,12 @@
+the time complexity is O(N^2) 
+Pseudocode 
+
+for i=i to n do 
+	j=i-1	
+	while(j>=0&& a[j]>a[i])
+		swap a[j+1] and a[j]
+		j=j-1;
+	end while
+end for
+
+	 

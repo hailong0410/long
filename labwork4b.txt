@@ -1,0 +1,99 @@
+Exercise 1a
+- To Define
+Mass = [400 70 45 2 0.3 0.16];
+Metabolism = [270 82 50 4.8 1.45 0.97];
+- Using linear_regression.m:
+[a0,a1,r2] = linear_regression(Mass, Metabolism)
+- Plot
+kg_tiger = 350; metabolism_tiger = a0 + a1*kg_tiger
+plot(kg_tiger, metabolism_tiger, 'k*','LineWidth',10)
+xlabel('Kg’); ylabel('Metabolism’)
+xlim([0 450]); ylim([0 350])
+title('Linear Regression')text(340, 230, 'Tiger’)
+text(50,300, 'y = 20.7762 + 0.5499*x (r2 = 0.9909)’)
+hold off
+Exercise 1b
+- Using curve fitting 
+a0 = 11.29;a1 = 0.6599; 
+kg_tiger = 350;
+metabolism_tiger = a0 + a1*kg_tiger;
+space = (min(Mass) + max(Mass))/20;
+xp=linspace(min(Mass)-space,max(Mass)+space);
+yp=a0+a1*xp;
+figure;
+box on
+hold on
+plot(Mass,Metabolism,'b*','LineWidth',2);
+plot(xp,yp,'r-');
+plot(kg_tiger, metabolism_tiger, 'k*','LineWidth',10)
+Exercise 1c
+- Using polyfit (with n=1) and polyval function:
+f = polyfit(Mass, Metabolism,1);
+func = @(x) f(1)*x + f(2)
+p = [f(1) f(2)];
+kg_tiger = 350
+metabolism_tiger = polyval(p, kg_tiger)
+- Plot
+figure; hold on; box on
+fplot(func, [0 450],'r');
+plot(Mass, Metabolism, 'b*','LineWidth',2);
+plot(kg_tiger, metabolism_tiger, 'k*','LineWidth',10)
+title('Polyfit with n = 1’); xlabel('Kg’); ylabel('Metabolism’); text(340, 260, 'Tiger')
+hold off
+Exercise 1d
+- Using polyfit (with n=2) and polyval function:
+f = polyfit(Mass, Metabolism, 2);
+func = @(x) f(1)*x^2 + f(2)*x +f(3);
+p = [f(1) f(2) f(3)];
+kg_tiger = 350
+metabolism_tiger = polyval(p, kg_tiger)
+- Plot
+figure; hold on; box on
+fplot(func, [0 450],'r');
+plot(Mass, Metabolism, 'b*','LineWidth',2);
+plot(kg_tiger, metabolism_tiger, 'k*','LineWidth',10)
+title('Polyfit with n = 1’); xlabel('Kg’); ylabel('Metabolism’); text(340, 260, 'Tiger')
+hold off
+
+
+Exercise 2
+- To Define
+P = [0.985 1.108 1.363 1.631];
+V = [25000 22200 18000 15000];
+R = 82.05;
+T = 303;
+- Using function fminsearch
+x = V; y = P;
+f = @(a) PVSSR(a, x, y)
+a = fminsearch(f, [10 10]);
+f(a)
+- Using fminbdn 
+fP=@(fV) R*T*(1+a(1)/fV+a(2)/fV^2)/fV
+[Vmin,Pmin] = fminbnd(fP,2000,4000)
+
+
+Exercise 3a
+- To Define
+student_height = [176 167 182 174 164 183 168 178 175 162 152 ...
+156 159 168 164 164 155 161 185 175 159 153 166 184 170 154 190 172 159 169];
+- Statistics
+disp(mean(student_height))
+disp(std(student_height))
+disp(var(student_height))
+disp(min(student_height))
+disp(max(student_height))
+disp(median(student_height))
+disp(mode(student_height))
+Exercise 3a
+- Histogram 
+figure
+box on
+histogram(student_height,10);
+xlabel('x’)
+ylabel('Frequency’)
+%xlim([150 200])
+Exercise 3b
+- Randi 
+A = randi([140 180], 100, 1);
+- Normrnd 
+B = normrnd(170, 30, 1, 200);
